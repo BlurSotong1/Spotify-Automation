@@ -1,0 +1,11 @@
+# ignore all keys.py files
+*.env
+
+#ignore credentials folder
+/credentials/
+
+#ignore the keys py file
+keys.py
+
+#ignore cache files
+*.cache
