@@ -1,62 +1,82 @@
-# Spotify-Automation
-Automation of adding spotify's weekly playlist into a separate playlist
+# Spotify Weekly Playlist Collator
 
 This Flask application allows users to automatically save their "Discover Weekly" Spotify playlist into a separate "collated" playlist. The application uses the Spotify API to handle user authentication, retrieve playlists, and manage playlist contents.
 
-Features
-OAuth 2.0 Authentication: Securely authenticate users with Spotify.
-Playlist Management: Retrieve and create playlists.
-Track Management: Add tracks from the "Discover Weekly" playlist to a designated "collated" playlist.
-Requirements
-Python 3.6+
-Flask
-Spotipy
-Setup
-1. Clone the repository
-bash
-Copy code
+## Features
+
+- **OAuth 2.0 Authentication:** Securely authenticate users with Spotify.
+- **Playlist Management:** Retrieve and create playlists.
+- **Track Management:** Add tracks from the "Discover Weekly" playlist to a designated "collated" playlist.
+
+## Requirements
+
+- Python 3.6+
+- Flask
+- Spotipy
+
+## Setup
+
+### 1. Clone the repository
+
+```bash
 git clone <repository_url>
 cd <repository_folder>
-2. Install the dependencies
-bash
-Copy code
-pip install -r requirements.txt
-3. Configure Spotify Credentials
-Create a file named credentials.py and add your Spotify API credentials.
+```
 
-python
-Copy code
+### 2. Install the dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure Spotify Credentials
+
+Create a file named `credentials.py` and add your Spotify API credentials.
+
+```python
 keys = {
     'CLIENT_ID': 'your_spotify_client_id',
     'CLIENT_SECRET': 'your_spotify_client_secret',
     'SECRET_KEY': 'your_flask_secret_key'
 }
-4. Run the Application
-bash
-Copy code
+```
+
+### 4. Run the Application
+
+```bash
 python app.py
-The application will start running on http://127.0.0.1:8080.
+```
 
-Usage
-Login: Navigate to http://127.0.0.1:8080 in your browser. You will be redirected to Spotify for authentication.
-Authorize: Authorize the application to access your Spotify account.
-Save Playlist: The application will automatically save tracks from your "Discover Weekly" playlist to the "collated" playlist.
-Routes
-/: Redirects to the Spotify login page.
-/redirect: Handles the redirect from Spotify after authentication and exchanges the authorization code for an access token.
-/saveDiscoverWeekly: Saves the tracks from the "Discover Weekly" playlist to the "collated" playlist.
+The application will start running on `http://127.0.0.1:8080`.
 
-Code Explanation
-Flask Application
-Login Route (/): Redirects the user to Spotify's authorization URL.
-Redirect Route (/redirect): Handles Spotify's callback, exchanges the authorization code for an access token, and saves it in the session.
-Save Discover Weekly Route (/saveDiscoverWeekly): Retrieves the user's playlists, finds the "Discover Weekly" and "collated" playlists, and adds tracks from the former to the latter.
-Helper Functions
-get_token(): Retrieves the access token from the session and refreshes it if necessary.
-create_spotify_oauth(): Creates an instance of SpotifyOAuth with the necessary credentials and scopes.
-Example Code
-python
-Copy code
+## Usage
+
+1. **Login:** Navigate to `http://127.0.0.1:8080` in your browser. You will be redirected to Spotify for authentication.
+2. **Authorize:** Authorize the application to access your Spotify account.
+3. **Save Playlist:** The application will automatically save tracks from your "Discover Weekly" playlist to the "collated" playlist.
+
+## Routes
+
+- `/`: Redirects to the Spotify login page.
+- `/redirect`: Handles the redirect from Spotify after authentication and exchanges the authorization code for an access token.
+- `/saveDiscoverWeekly`: Saves the tracks from the "Discover Weekly" playlist to the "collated" playlist.
+
+## Code Explanation
+
+### Flask Application
+
+- **Login Route (`/`)**: Redirects the user to Spotify's authorization URL.
+- **Redirect Route (`/redirect`)**: Handles Spotify's callback, exchanges the authorization code for an access token, and saves it in the session.
+- **Save Discover Weekly Route (`/saveDiscoverWeekly`)**: Retrieves the user's playlists, finds the "Discover Weekly" and "collated" playlists, and adds tracks from the former to the latter.
+
+### Helper Functions
+
+- **`get_token()`**: Retrieves the access token from the session and refreshes it if necessary.
+- **`create_spotify_oauth()`**: Creates an instance of `SpotifyOAuth` with the necessary credentials and scopes.
+
+### Example Code
+
+```python
 from flask import Flask, request, redirect, url_for, session
 import time
 import spotipy
@@ -144,8 +164,13 @@ def create_spotify_oauth():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
-Troubleshooting
-Ensure your Spotify API credentials are correctly set in credentials.py.
-Verify the redirect URI in the Spotify Developer Dashboard matches the one defined in the application.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+```
+
+## Troubleshooting
+
+- Ensure your Spotify API credentials are correctly set in `credentials.py`.
+- Verify the redirect URI in the Spotify Developer Dashboard matches the one defined in the application.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
